@@ -1,0 +1,80 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://default_theme.tres" type="Theme" id=1]
+[ext_resource path="res://main.gd" type="Script" id=2]
+
+[node name="main" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="pnl_menu" type="Panel" parent="."]
+anchor_right = 1.0
+margin_bottom = 24.0
+
+[node name="lbl_thumb_size" type="Label" parent="pnl_menu"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -256.0
+margin_right = -136.0
+margin_bottom = 24.0
+text = "256 x 256"
+align = 2
+valign = 1
+
+[node name="scr_thumb_size" type="HSlider" parent="pnl_menu"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -128.0
+margin_right = -8.0
+margin_bottom = 24.0
+focus_mode = 0
+min_value = 32.0
+max_value = 256.0
+step = 32.0
+value = 128.0
+
+[node name="hsplit" type="HSplitContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 24.0
+margin_bottom = -28.0
+
+[node name="list" type="ItemList" parent="hsplit"]
+margin_right = 192.0
+margin_bottom = 488.0
+rect_min_size = Vector2( 192, 0 )
+
+[node name="vbox" type="VBoxContainer" parent="hsplit"]
+margin_left = 204.0
+margin_right = 960.0
+margin_bottom = 488.0
+
+[node name="hbox" type="HBoxContainer" parent="hsplit/vbox"]
+margin_right = 756.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 0, 24 )
+
+[node name="scroll" type="ScrollContainer" parent="hsplit/vbox"]
+margin_top = 28.0
+margin_right = 756.0
+margin_bottom = 488.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="grid" type="GridContainer" parent="hsplit/vbox/scroll"]
+margin_right = 756.0
+margin_bottom = 460.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="pnl_status" type="Panel" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -28.0
+
+[connection signal="value_changed" from="pnl_menu/scr_thumb_size" to="." method="_on_scr_thumb_size_value_changed"]
+[connection signal="item_selected" from="hsplit/list" to="." method="_on_list_item_selected"]
+[connection signal="resized" from="hsplit/vbox/scroll" to="." method="_on_scroll_resized"]
